@@ -20,9 +20,12 @@
             </intent-filter>
         </activity>
         <service android:name=".ServiceIsMy">
-            <intent-filter>
-                <action android:name="android.media.browse.MediaBrowserService" />
-            </intent-filter>
+        <intent-filter>
+            <action android:name="android.media.browse.MediaBrowserService" />
+        </intent-filter>
+    </service>
+        <service android:name=".BoundService">
+
         </service>
         <receiver android:name=".MediaButtonReceiver">
 

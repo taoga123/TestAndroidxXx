@@ -14,7 +14,7 @@ import androidx.annotation.Nullable;
 import androidx.core.app.NotificationCompat;
 
 
-import static android.app.Notification.*;
+
 import static com.example.testandroidx.App.CHANNEL_1_ID;
 
 
