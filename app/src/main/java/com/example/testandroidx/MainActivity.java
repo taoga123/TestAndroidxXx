@@ -83,9 +83,9 @@ public class MainActivity extends AppCompatActivity {
         button2.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
-                startService(intent);
                 BindService();
+                startService(intent);
+
             }
 
 
@@ -95,8 +95,9 @@ public class MainActivity extends AppCompatActivity {
         button3.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                stopService(intent);
                 UnBindService();
+                stopService(intent);
+
             }
         });
 

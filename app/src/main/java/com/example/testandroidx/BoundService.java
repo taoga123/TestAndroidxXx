@@ -21,6 +21,7 @@ public class BoundService extends Service {
     @Override
     public IBinder onBind(Intent intent) {
         Log.e( "onBind: ", "bind");
+        music();
         return iBinder;
     }
 
@@ -39,13 +40,13 @@ public class BoundService extends Service {
     @Override
     public boolean onUnbind(Intent intent) {
         Log.e( "onUnbind: ", "unbind");
+        mediaPlayer.stop();
         return super.onUnbind(intent);
     }
 
     @Override
     public int onStartCommand(Intent intent, int flags, int startId) {
 
-        music();
 
         return START_STICKY;
 
@@ -72,7 +73,6 @@ public class BoundService extends Service {
 
     @Override
     public void onDestroy() {
-        mediaPlayer.stop();
 
         super.onDestroy();
     }
