@@ -106,7 +106,15 @@ public class MainActivity extends AppCompatActivity {
             public void onClick(View v) {
                 if(isServiceBound)
                 {
-                    boundService.music();
+                    if (boundService.mediaPlayer.isPlaying())
+                    {
+                        boundService.mediaPlayer.stop();
+                    }
+                    else
+                    {
+                        boundService.mediaPlayer.prepareAsync();
+                    }
+
                 }
             }
         });

@@ -17,6 +17,12 @@ public class BoundService extends Service {
     MediaPlayer mediaPlayer;
     MyServiceBinder iBinder = new MyServiceBinder();
 
+    @Override
+    public void onCreate() {
+        music();
+        super.onCreate();
+    }
+
     @Nullable
     @Override
     public IBinder onBind(Intent intent) {
@@ -42,6 +48,7 @@ public class BoundService extends Service {
     @Override
     public boolean onUnbind(Intent intent) {
         Log.e( "onUnbind: ", "unbind");
+        mediaPlayer.stop();
         return super.onUnbind(intent);
     }
 
@@ -63,7 +70,7 @@ public class BoundService extends Service {
                 mp.start();
             }
         });
-        mediaPlayer.prepareAsync();
+
         Log.e( "music: ", "chạy ngay đi");
     }
 
