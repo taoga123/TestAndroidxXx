@@ -21,15 +21,17 @@ public class BoundService extends Service {
     @Override
     public IBinder onBind(Intent intent) {
         Log.e( "onBind: ", "bind");
-        music();
+
         return iBinder;
     }
 
     class MyServiceBinder extends Binder{
         public BoundService getService(){
+
             return BoundService.this;
         }
     }
+
 
     @Override
     public void onRebind(Intent intent) {
@@ -40,18 +42,12 @@ public class BoundService extends Service {
     @Override
     public boolean onUnbind(Intent intent) {
         Log.e( "onUnbind: ", "unbind");
-        mediaPlayer.stop();
         return super.onUnbind(intent);
     }
 
-    @Override
-    public int onStartCommand(Intent intent, int flags, int startId) {
 
-        return START_STICKY;
 
-    }
-
-    private void music()
+    public void music()
     {
         mediaPlayer = new MediaPlayer();
         try {
@@ -68,6 +64,7 @@ public class BoundService extends Service {
             }
         });
         mediaPlayer.prepareAsync();
+        Log.e( "music: ", "chạy ngay đi");
     }
 
     @Override

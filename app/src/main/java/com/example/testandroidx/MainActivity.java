@@ -14,6 +14,7 @@ import android.content.ServiceConnection;
 import android.media.MediaPlayer;
 import android.os.Bundle;
 import android.os.IBinder;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -25,9 +26,8 @@ import static com.example.testandroidx.App.CHANNEL_1_ID;
 public class MainActivity extends AppCompatActivity {
     FirebaseAuth firebaseAuth;
 
-    Button button,button2,button3;
+    Button button,button2,button3,button4,button5;
     EditText edit1,edit2;
-    MediaPlayer mediaPlayer;
 
     NotificationManagerCompat notificationCompat;
 
@@ -45,6 +45,8 @@ public class MainActivity extends AppCompatActivity {
         button = findViewById(R.id.button);
         button2 = findViewById(R.id.button2);
         button3 = findViewById(R.id.button3);
+        button4 = findViewById(R.id.button4);
+        button5 = findViewById(R.id.button5);
         firebaseAuth = FirebaseAuth.getInstance();
 
         notificationCompat = NotificationManagerCompat.from(this);
@@ -85,7 +87,6 @@ public class MainActivity extends AppCompatActivity {
             public void onClick(View v) {
                 BindService();
 
-
             }
 
 
@@ -97,10 +98,33 @@ public class MainActivity extends AppCompatActivity {
             public void onClick(View v) {
                 UnBindService();
 
-
             }
         });
 
+        button4.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if(isServiceBound)
+                {
+                    boundService.music();
+                }
+            }
+        });
+
+
+        button5.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if(isServiceBound)
+                {
+                    if (boundService.mediaPlayer.isPlaying())
+                    {
+                        boundService.mediaPlayer.stop();
+                    }
+                    Log.e( "onClick: ", "chạy đi đâu" );
+                }
+            }
+        });
     }
 
     private void BindService() {
