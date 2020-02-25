@@ -18,15 +18,16 @@ import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.Toast;
 
 import com.google.firebase.auth.FirebaseAuth;
 
 import static com.example.testandroidx.App.CHANNEL_1_ID;
 
-public class MainActivity extends AppCompatActivity {
+public class MainActivity extends AppCompatActivity  {
     FirebaseAuth firebaseAuth;
 
-    Button button,button2,button3,button4,button5;
+    Button button,button2,button3,button4,button5,button6;
     EditText edit1,edit2;
 
     NotificationManagerCompat notificationCompat;
@@ -47,6 +48,7 @@ public class MainActivity extends AppCompatActivity {
         button3 = findViewById(R.id.button3);
         button4 = findViewById(R.id.button4);
         button5 = findViewById(R.id.button5);
+        button6 = findViewById(R.id.button6);
         firebaseAuth = FirebaseAuth.getInstance();
 
         notificationCompat = NotificationManagerCompat.from(this);
@@ -108,6 +110,7 @@ public class MainActivity extends AppCompatActivity {
                 {
                     if (boundService.mediaPlayer.isPlaying())
                     {
+
                         boundService.mediaPlayer.stop();
                     }
                     else
@@ -128,12 +131,38 @@ public class MainActivity extends AppCompatActivity {
                     if (boundService.mediaPlayer.isPlaying())
                     {
                         boundService.mediaPlayer.stop();
+                        Intent intent1 = getIntent();
+                        String saysomethings = intent1.getStringExtra("1");
+                        Toast.makeText(MainActivity.this,saysomethings,Toast.LENGTH_LONG).show();
+
                     }
                     Log.e( "onClick: ", "chạy đi đâu" );
                 }
             }
         });
+
+        button6.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if(isServiceBound)
+                {
+                    if (boundService.mediaPlayer.isPlaying())
+                    {
+                        boundService.reponse();
+
+                        button6.setText(boundService.saysomethings);
+
+                    }
+                    else
+                    {
+                        Toast.makeText(MainActivity.this,"ko hien gi het",Toast.LENGTH_LONG).show();
+                    }
+                }
+
+            }
+        });
     }
+
 
     private void BindService() {
         if(serviceConnection == null)
@@ -154,6 +183,7 @@ public class MainActivity extends AppCompatActivity {
         }
         Intent intent = new Intent(this, BoundService.class);
         bindService(intent,serviceConnection,Context.BIND_AUTO_CREATE);
+
     }
 
     private void UnBindService(){
@@ -164,4 +194,15 @@ public class MainActivity extends AppCompatActivity {
         }
 
     }
+
+//    @Override
+//    public void reponse()
+//    {
+//        if (boundService.mediaPlayer.isPlaying())
+//        {
+//            Intent intent = new Intent(this,Main2Activity.class);
+//            startActivity(intent);
+//        }
+//        Log.e("reponse","chay di");
+//    }
 }

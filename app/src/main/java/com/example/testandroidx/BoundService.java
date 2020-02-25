@@ -1,21 +1,30 @@
 package com.example.testandroidx;
 
+import android.app.Application;
 import android.app.Service;
+import android.content.Context;
 import android.content.Intent;
 import android.media.AudioManager;
 import android.media.MediaPlayer;
 import android.os.Binder;
 import android.os.IBinder;
 import android.util.Log;
+import android.widget.Toast;
 
 import java.io.IOException;
 
 import androidx.annotation.Nullable;
+import androidx.appcompat.app.AppCompatActivity;
 
 
 public class BoundService extends Service {
     MediaPlayer mediaPlayer;
     MyServiceBinder iBinder = new MyServiceBinder();
+    MainActivity mainActivity;
+    String saysomethings;
+//    ServiceCallbacks serviceCallbacks;
+
+
 
     @Override
     public void onCreate() {
@@ -28,12 +37,19 @@ public class BoundService extends Service {
     public IBinder onBind(Intent intent) {
         Log.e( "onBind: ", "bind");
 
+//        if (serviceCallbacks != null) {
+//            serviceCallbacks.reponse();
+//        }
+
         return iBinder;
     }
+
+
 
     class MyServiceBinder extends Binder{
         public BoundService getService(){
             music();
+
             return BoundService.this;
         }
     }
@@ -52,7 +68,16 @@ public class BoundService extends Service {
         return super.onUnbind(intent);
     }
 
+//    public interface ServiceCallbacks {
+//        void reponse();
+//    }
 
+    /** method for clients */
+    public void reponse(){
+
+        saysomethings  = "thanhcong";
+
+    }
 
     public void music()
     {
@@ -72,6 +97,7 @@ public class BoundService extends Service {
         });
 
         Log.e( "music: ", "chạy ngay đi");
+
     }
 
     @Override
