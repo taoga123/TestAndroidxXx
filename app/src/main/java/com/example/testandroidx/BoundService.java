@@ -19,7 +19,7 @@ public class BoundService extends Service {
 
     @Override
     public void onCreate() {
-        music();
+
         super.onCreate();
     }
 
@@ -33,7 +33,7 @@ public class BoundService extends Service {
 
     class MyServiceBinder extends Binder{
         public BoundService getService(){
-
+            music();
             return BoundService.this;
         }
     }
@@ -48,7 +48,7 @@ public class BoundService extends Service {
     @Override
     public boolean onUnbind(Intent intent) {
         Log.e( "onUnbind: ", "unbind");
-        mediaPlayer.stop();
+
         return super.onUnbind(intent);
     }
 
