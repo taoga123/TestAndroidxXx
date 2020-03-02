@@ -34,11 +34,7 @@ public class ServiceIsMy extends Service {
 
         Intent intent1 = new Intent(this,MediaButtonReceiver.class);
 
-
         PendingIntent pendingIntent1 = PendingIntent.getBroadcast(this,0,intent1,0);
-
-
-
 
         Notification notification = new NotificationCompat.Builder(this,CHANNEL_1_ID)
 
@@ -59,12 +55,10 @@ public class ServiceIsMy extends Service {
                         .setShowActionsInCompactView(1,2)
                         .setShowCancelButton(true)
 
-
                 )
                 .setPriority(Notification.PRIORITY_MAX)
 
                 .setContentIntent(pendingIntent)
-
 
                 .build();
 

@@ -4,18 +4,30 @@ import android.annotation.TargetApi;
 import android.app.Application;
 import android.app.NotificationChannel;
 import android.app.NotificationManager;
+import android.content.ComponentName;
+import android.content.Context;
+import android.content.Intent;
+import android.content.ServiceConnection;
 import android.os.Build;
+import android.os.IBinder;
+import android.widget.Button;
 
 public class App extends Application {
 
     public static final String CHANNEL_1_ID = "1";
     String CHANNEL_2_ID;
+    ServiceConnection serviceConnection;
+    boolean isServiceBound;
+    BoundService boundService;
+
 
     @Override
     public void onCreate() {
         super.onCreate();
 
         createNotificationChanel();
+
+
     }
 
 
@@ -39,9 +51,13 @@ public class App extends Application {
             NotificationManager manager = getSystemService(NotificationManager.class);
             manager.createNotificationChannel(channel1);
 
+
+
 //            manager.createNotificationChannel(channel2);
 
         }
     }
+
+
 
 }

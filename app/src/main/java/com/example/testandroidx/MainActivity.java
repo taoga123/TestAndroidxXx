@@ -53,15 +53,16 @@ public class MainActivity extends AppCompatActivity  {
 
         notificationCompat = NotificationManagerCompat.from(this);
 
-        Intent broadIntent = new Intent(this, NotificationManager.class);
-        broadIntent.putExtra("toastMessage",broadIntent);
-
-
-        Intent intentnoti = new Intent(this, MainActivity.class);
-        PendingIntent pendingIntent = PendingIntent.getActivity(this, 0, intentnoti, 0);
 
 
 
+        BindService();
+
+        if (isServiceBound)
+        {
+
+            boundService.notifiCation();
+        }
 
         button.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -89,6 +90,7 @@ public class MainActivity extends AppCompatActivity  {
             public void onClick(View v) {
                 BindService();
 
+
             }
 
 
@@ -108,6 +110,7 @@ public class MainActivity extends AppCompatActivity  {
             public void onClick(View v) {
                 if(isServiceBound)
                 {
+
                     if (boundService.mediaPlayer.isPlaying())
                     {
 
@@ -131,9 +134,7 @@ public class MainActivity extends AppCompatActivity  {
                     if (boundService.mediaPlayer.isPlaying())
                     {
                         boundService.mediaPlayer.stop();
-                        Intent intent1 = getIntent();
-                        String saysomethings = intent1.getStringExtra("1");
-                        Toast.makeText(MainActivity.this,saysomethings,Toast.LENGTH_LONG).show();
+
 
                     }
                     Log.e( "onClick: ", "chạy đi đâu" );
@@ -162,7 +163,6 @@ public class MainActivity extends AppCompatActivity  {
             }
         });
     }
-
 
     private void BindService() {
         if(serviceConnection == null)
@@ -195,7 +195,21 @@ public class MainActivity extends AppCompatActivity  {
 
     }
 
-//    @Override
+    @Override
+    protected void onStart() {
+        super.onStart();
+        Log.e("onStart: ", "start");
+    }
+
+    @Override
+    protected void onResume() {
+
+
+        super.onResume();
+        Log.e("onStart: ", "resume");
+    }
+
+    //    @Override
 //    public void reponse()
 //    {
 //        if (boundService.mediaPlayer.isPlaying())
@@ -205,4 +219,5 @@ public class MainActivity extends AppCompatActivity  {
 //        }
 //        Log.e("reponse","chay di");
 //    }
+
 }
